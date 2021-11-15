@@ -1,5 +1,27 @@
 <!DOCTYPE RCC><RCC version="1.0">
- <qresource>
+  <qresource>
+    <!-- Kirigami UI QML -->
+<!--     <file alias="AboutPage.qml">QPrompt/src/kirigami_ui/AboutPage.qml</file> -->
+    <file alias="EditorToolbar.qml">QPrompt/src/kirigami_ui/EditorToolbar.qml</file>
+    <file alias="MarkersDrawer.qml">QPrompt/src/kirigami_ui/MarkersDrawer.qml</file>
+    <file alias="InputsOverlay.qml">QPrompt/src/kirigami_ui/InputsOverlay.qml</file>
+    <file alias="KeyInputButton.qml">QPrompt/src/kirigami_ui/KeyInputButton.qml</file>
+<!--     <file alias="PrompterPage.qml">QPrompt/src/kirigami_ui/PrompterPage.qml</file> -->
+<!--     <file alias="TelemetryPage.qml">QPrompt/src/kirigami_ui/TelemetryPage.qml</file> -->
+<!--     <file alias="RemotePage.qml">QPrompt/src/kirigami_ui/RemotePage.qml</file> -->
+    <!-- Prompter QML -->
+    <file alias="PrompterView.qml">QPrompt/src/prompter/PrompterView.qml</file>
+    <file alias="Prompter.qml">QPrompt/src/prompter/Prompter.qml</file>
+    <file alias="ProgressIndicator.qml">QPrompt/src/prompter/ProgressIndicator.qml</file>
+    <file alias="Countdown.qml">QPrompt/src/prompter/Countdown.qml</file>
+    <file alias="TimerClock.qml">QPrompt/src/prompter/TimerClock.qml</file>
+    <file alias="ReadRegionOverlay.qml">QPrompt/src/prompter/ReadRegionOverlay.qml</file>
+    <file alias="PrompterBackground.qml">QPrompt/src/prompter/PrompterBackground.qml</file>
+    <file alias="Remote.qml">QPrompt/src/prompter/Remote.qml</file>
+    <file alias="Find.qml">QPrompt/src/prompter/Find.qml</file>
+    <file alias="Flip.qml">QPrompt/src/prompter/Flip.qml</file>
+    <file alias="ProjectionsManager.qml">QPrompt/src/prompter/ProjectionsManager.qml</file>
+    <file alias="Test.qml">qml/Test.qml</file>
     <file>qml/main.qml</file>
- </qresource>
+  </qresource>
 </RCC>

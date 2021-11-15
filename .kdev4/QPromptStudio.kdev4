@@ -1,0 +1,41 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x1a\x00Q\x00P\x00r\x00o\x00m\x00p\x00t\x00S\x00t\x00u\x00d\x00i\x00o)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/javier/Development/Teleprompters/qprompt/QPromptStudio/build
+Build Type=Debug
+CMake Binary=/usr/local/bin/cmake
+CMake Executable=/usr/local/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host System
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=qpromptstudio
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x03\x00\x00\x00\x1a\x00Q\x00P\x00r\x00o\x00m\x00p\x00t\x00S\x00t\x00u\x00d\x00i\x00o\x00\x00\x00\x06\x00s\x00r\x00c\x00\x00\x00\x1a\x00q\x00p\x00r\x00o\x00m\x00p\x00t\x00s\x00t\x00u\x00d\x00i\x00o)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/javier/Development/Teleprompters/qprompt/QPromptStudio
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Kill Before Executing Again=4194304
+Project Target=QPromptStudio,src,qpromptstudio
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit

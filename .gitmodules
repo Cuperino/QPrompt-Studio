@@ -1,0 +1,6 @@
+[submodule "3rdparty/KDDockWidgets"]
+	path = 3rdparty/KDDockWidgets
+	url = https://github.com/KDAB/KDDockWidgets.git
+[submodule "QPrompt"]
+	path = src/QPrompt
+	url = https://github.com/Cuperino/QPrompt
