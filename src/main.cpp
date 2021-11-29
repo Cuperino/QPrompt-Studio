@@ -49,6 +49,28 @@ int main(int argc, char *argv[])
     KDDockWidgets::Config::self().setQmlEngine(&appEngine);
     appEngine.load((QUrl(QStringLiteral("qrc:/qml/main.qml"))));
 
+    auto prompterDockWidget = new KDDockWidgets::DockWidgetQuick("Prompter", KDDockWidgets::DockWidgetBase::Option::Option_NotClosable);
+    prompterDockWidget->setWidget(QStringLiteral("qrc:/PrompterView.qml"));
+    //prompterDockWidget->setWidget(QStringLiteral("qrc:/Prompter.qml"));
+    prompterDockWidget->show();
+
+    auto editorDockWidget = new KDDockWidgets::DockWidgetQuick("Editor", KDDockWidgets::DockWidgetBase::Option::Option_NotClosable);
+    editorDockWidget->setWidget(QStringLiteral("qrc:/PrompterView.qml"));
+    editorDockWidget->show();
+
+    auto markersDockWidget = new KDDockWidgets::DockWidgetQuick("Markers");
+    markersDockWidget->setWidget(QStringLiteral("qrc:/MarkersDrawer.qml"));
+    markersDockWidget->show();
+
+    auto toolbarDockWidget = new KDDockWidgets::DockWidgetQuick("Toolbar", KDDockWidgets::DockWidgetBase::Option::Option_NotClosable);
+    toolbarDockWidget->setWidget(QStringLiteral("qrc:/EditorToolbar.qml"));
+    toolbarDockWidget->show();
+
+    KDDockWidgets::MainWindowBase *mainWindow = KDDockWidgets::DockRegistry::self()->mainwindows().constFirst();
+    mainWindow->addDockWidgetAsTab(prompterDockWidget);
+    mainWindow->addDockWidget(editorDockWidget, KDDockWidgets::Location_OnLeft, nullptr, QSize(660, 480));
+    mainWindow->addDockWidget(markersDockWidget, KDDockWidgets::Location_OnLeft, nullptr, QSize(320, /*ignored*/0));
+    mainWindow->addDockWidget(toolbarDockWidget, KDDockWidgets::Location_OnBottom, nullptr, QSize(/*ignored*/0, 96));
 
     return app.exec();
 }
