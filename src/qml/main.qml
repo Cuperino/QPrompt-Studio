@@ -94,6 +94,25 @@ ApplicationWindow {
     property double __opacity: 1.0
     property bool __translucidBackground: false // !__opacity
 
+    onFrameSwapped: {
+        // Update Projections
+        const n = 0; //projectionManager.model.count;
+        if (n>0)
+            prompterPage.grabToImage(function(p) {
+                //for (var i=0; i<n; ++i)
+                    //projectionManager.model.setProperty(i, "p", String(p.url));
+            });
+    }
+
+    //ProjectionsManager {
+        //id: projectionManager
+        //backgroundColor: "#000000"//root.pageStack.currentItem.prompterBackground.color
+        //backgroundOpacity: 1//root.pageStack.currentItem.prompterBackground.opacity
+        ////Forward to prompter and not editor to prevent editing from projection windows
+        ////forwardTo: root.pageStack.currentItem.prompter
+        //forwardTo: prompterPage
+    //}
+
     KDDW.MainWindowLayout {
         id: prompterPage
 
@@ -146,6 +165,7 @@ ApplicationWindow {
         //}
 
         Component.onCompleted: {
+            projectionManager.putDisplayFlip(Qt.application.screens[0].name, 1/*flipSetting*/)
 
             //addDockWidget(markers, KDDW.KDDockWidgets.Location_OnLeft, null, Qt.size(320, 100));
             //addDockWidget(editorToolbar, KDDW.KDDockWicdgets.Location_OnBottom, null, Qt.size(1920, 48), KDDW.KDDockWidgets.Option_NotClosable);
