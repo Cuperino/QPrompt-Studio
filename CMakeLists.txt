@@ -29,6 +29,7 @@ project(QPromptStudio
 
 # Send compiled program and library binaries to "build/bin"
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(KDDW_FRONTEND_QTQUICK ON)
 
 find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
