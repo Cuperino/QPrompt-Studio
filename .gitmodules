@@ -4,3 +4,6 @@
 [submodule "QPrompt"]
 	path = src/QPrompt
 	url = https://github.com/Cuperino/QPrompt
+[submodule "src/QPrompt"]
+	path = src/QPrompt
+	url = git@github.com:Cuperino/QPrompt.git
