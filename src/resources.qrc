@@ -21,7 +21,11 @@
     <file alias="Find.qml">QPrompt/src/prompter/Find.qml</file>
     <file alias="Flip.qml">QPrompt/src/prompter/Flip.qml</file>
     <file alias="ProjectionsManager.qml">QPrompt/src/prompter/ProjectionsManager.qml</file>
+    <!-- Other QML -->
+    <file alias="WindowDragger.qml">QPrompt/src/qt/WindowDragger.qml</file>
+    <!-- Local QML -->
     <file alias="Test.qml">qml/Test.qml</file>
+    <file alias="PrompterPage.qml">qml/PrompterPage.qml</file>
     <file>qml/main.qml</file>
   </qresource>
 </RCC>
