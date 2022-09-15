@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
 #else
     QApplication app(argc, argv);
 #endif
+    KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtQuick);
     QCoreApplication::setOrganizationName("Cuperino");
     QCoreApplication::setOrganizationDomain("cuperino.com");
     QCoreApplication::setApplicationName("QPrompt");

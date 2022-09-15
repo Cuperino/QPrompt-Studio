@@ -19,7 +19,7 @@ set(qpromptstudio_ASSETS
 #if (Qt6QuickCompiler_FOUND)
     #qtquick_compiler_add_resources(qpromptstudio_SRCS resources.qrc)
 #else ()
-    qt6_add_resources(qpromptstudio_SRCS resources.qrc)
+    qt_add_resources(qpromptstudio_SRCS resources.qrc)
 #endif()
 
 add_executable(qpromptstudio ${qpromptstudio_SRCS} ${qpromptstudio_HDRS} ${qpromptstudio_ASSETS})

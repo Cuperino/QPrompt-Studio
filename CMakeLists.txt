@@ -5,7 +5,12 @@ set(RELEASE_SERVICE_VERSION_MINOR "1")
 set(RELEASE_SERVICE_VERSION_MICRO "0")
 set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
-project(QPromptStudio VERSION ${RELEASE_SERVICE_VERSION})
+project(QPromptStudio
+    VERSION ${RELEASE_SERVICE_VERSION}
+    DESCRIPTION "Teleprompter software for dedicated teleprompter operators"
+    HOMEPAGE_URL "https://qprompt.app/studio"
+    LANGUAGES CXX
+)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -21,13 +26,6 @@ set(CMAKE_AUTORCC ON)
 set(QT_MIN_VERSION 6.3.0)
 set(ECM_MIN_VERSION 5.83.0)
 #set(KF_MIN_VERSION 5.68.0)
-
-project(QPromptStudio
-    VERSION ${RELEASE_SERVICE_VERSION}
-    DESCRIPTION "Teleprompter software for dedicated teleprompter operators"
-    HOMEPAGE_URL "https://qprompt.app/studio"
-    LANGUAGES CXX
-)
 
 # Send compiled program and library binaries to "build/bin"
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
