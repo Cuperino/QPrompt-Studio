@@ -1,7 +1,7 @@
 /*
   This file is part of QPrompt Studio.
 
-  SPDX-FileCopyrightText: 2021 Javier O. Cordero Pérez
+  SPDX-FileCopyrightText: 2022 Javier O. Cordero Pérez
   Author: Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
 
   SPDX-License-Identifier: GPL-3.0-only
@@ -11,13 +11,14 @@
 
 
 import QtQuick 2.6
-import org.kde.kirigami 2.9 as Kirigami
 import QtQuick.Controls 2.15
-import com.kdab.dockwidgets 1.0 as KDDW
-import QtQuick.Layouts 1.15
 import QtQuick.Controls.Material 2.15
-import QtQuick.Dialogs 1.3
+import QtQuick.Layouts 1.15
+//import QtQuick.Dialogs 1.3
 import Qt.labs.platform 1.1 as Labs
+
+import com.kdab.dockwidgets 1.0 as KDDW
+//import org.kde.kirigami 2.9 as Kirigami
 
 import com.cuperino.qprompt.document 1.0
 
@@ -27,59 +28,64 @@ ApplicationWindow {
     width: 1366
     height: 728
 
-    menuBar: MenuBar {
-        Menu {
+    Labs.MenuBar {
+        id: nativeMenus
+        window: root
+        menus: [
+        Labs.Menu {
             title: qsTr("&File")
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Save layout")
                 onTriggered: {
                     layoutSaver.saveToFile("mySavedLayout.json");
                 }
             }
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Restore layout")
                 onTriggered: {
                     layoutSaver.restoreFromFile("mySavedLayout.json");
                 }
             }
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Toggle widget #4")
                 onTriggered: {
                     toggleDockWidget(dock4);
                 }
             }
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Toggle widget #5")
                 onTriggered: {
                     toggleDockWidget(dock5);
                 }
             }
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Toggle widget #6")
                 onTriggered: {
                     toggleDockWidget(dock6);
                 }
             }
 
-            Action {
+            Labs.MenuItem {
                 text: qsTr("Close All")
                 onTriggered: {
                    _kddwDockRegistry.clear();
                 }
             }
 
-            MenuSeparator { }
-            Action { text: qsTr("&Quit")
+            Labs.MenuSeparator { }
+            Labs.MenuItem {
+                text: qsTr("&Quit")
                 onTriggered: {
                     Qt.quit();
                 }
             }
         }
+        ]
     }
 
     //Item {
@@ -94,15 +100,15 @@ ApplicationWindow {
     property double __opacity: 1.0
     property bool __translucidBackground: false // !__opacity
 
-    onFrameSwapped: {
-        // Update Projections
-        const n = 0; //projectionManager.model.count;
-        if (n>0)
-            prompterPage.grabToImage(function(p) {
-                //for (var i=0; i<n; ++i)
-                    //projectionManager.model.setProperty(i, "p", String(p.url));
-            });
-    }
+    //onFrameSwapped: {
+        //// Update Projections
+        //const n = 0; //projectionManager.model.count;
+        //if (n>0)
+            ////prompterPage.grabToImage(function(p) {
+                ////for (var i=0; i<n; ++i)
+                    ////projectionManager.model.setProperty(i, "p", String(p.url));
+            ////});
+    //}
 
     //ProjectionsManager {
         //id: projectionManager
@@ -114,12 +120,12 @@ ApplicationWindow {
     //}
 
     KDDW.MainWindowLayout {
-        id: prompterPage
+        id: layout
 
         anchors.fill: parent
 
         // Equivalent to initializing MainWindow with HasCentralFrame from constructor.
-        options: KDDW.KDDockWidgets.MainWindowOption_HasCentralFrame
+        //options: KDDW.KDDockWidgets.MainWindowOption_HasCentralFrame
 
         // property alias prompter: viewport.prompter
         //property alias editor: viewport.editor
@@ -130,26 +136,42 @@ ApplicationWindow {
         // Each main layout needs a unique id
         uniqueName: "MainLayout-1"
 
-//         Repeater {
-//             model: 3
-//             KDDW.DockWidget {
-//                 uniqueName: "fromRepeater-" + index
-//                 source: ":/Another.qml"
-//             }
-//         }
-
-        //KDDW.DockWidget {
-            //id: markers
-            //uniqueName: "Markers"
-            //source: ":/MarkersDrawer.qml"
-            //property alias prompterPage: prompterPage
+        //Repeater {
+        //    model: 3
+        //    KDDW.DockWidget {
+        //        uniqueName: "fromRepeater-" + index
+        //        source: ":/Another.qml"
+        //    }
         //}
 
-        //KDDW.DockWidget {
-            //id: editorToolbar
-            //uniqueName: "Toolbar"
+        KDDW.DockWidget {
+            id: markers
+            uniqueName: "Markers"
+            Rectangle {
+                color: "#00FF00"
+                anchors.fill: parent
+            }
+        }
+        KDDW.DockWidget {
+            id: projections
+            uniqueName: "Screens"
+            Rectangle {
+                color: "#FF00FF"
+                anchors.fill: parent
+            }
+        }
+        KDDW.DockWidget {
+            id: editorToolbar
+            uniqueName: "Toolbar"
             //source: ":/EditorToolbar.qml"
-        //}
+            //EditorToolbar {
+            //    id: editorToolbar
+            //}
+            Rectangle {
+                color: "#0000FF"
+                anchors.fill: parent
+            }
+        }
 /*
         KDDW.DockWidget {
             id: test
@@ -157,22 +179,28 @@ ApplicationWindow {
             source: ":/Test.qml"
         }*/
 
-        //KDDW.DockWidget {
-            //id: viewport
-            //uniqueName: "Prompter"
-            //source: ":/PrompterView.qml"
-            //property alias toolbar: editorToolbar
-        //}
+        KDDW.DockWidget {
+            id: prompterPage
+            uniqueName: "Editor"
+            Rectangle {
+                color: "#FF0000"
+                anchors.fill: parent
+            }
+            //source: ":/PrompterPage.qml"
+            //property alias editorToolbar: editorToolbar
+        }
+
 
         Component.onCompleted: {
-            projectionManager.putDisplayFlip(Qt.application.screens[0].name, 1/*flipSetting*/)
+            //projectionManager.putDisplayFlip(Qt.application.screens[0].name, 1/*flipSetting*/)
 
-            //addDockWidget(markers, KDDW.KDDockWidgets.Location_OnLeft, null, Qt.size(320, 100));
-            //addDockWidget(editorToolbar, KDDW.KDDockWicdgets.Location_OnBottom, null, Qt.size(1920, 48), KDDW.KDDockWidgets.Option_NotClosable);
-            //addDockWidget(test, KDDW.KDDockWicdgets.Location_OnBottom, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
+            addDockWidget(prompterPage, KDDW.KDDockWidgets.Location_OnRight, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
+            addDockWidget(markers, KDDW.KDDockWidgets.Location_OnLeft, prompterPage, Qt.size(320, 100));
+            addDockWidget(editorToolbar, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(1920, 24), KDDW.KDDockWidgets.Option_NotClosable);
+            markers.addDockWidgetAsTab(projections);
+            //addDockWidget(test, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
             //addDockWidgetAsTab(test);
-            //addDockWidget(viewport, KDDW.KDDockWicdgets.Location_OnTop, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
-            //addDockWidget(viewport, null, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
+            //addDockWidget(prompterPage, KDDW.KDDockWidgets.Location_OnTop, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
 
             // Adds dock6 but specifies a preferred initial size and it starts hidden
             // When toggled it will be shown on the desired dock location.
@@ -181,6 +209,7 @@ ApplicationWindow {
                                  //Qt.size(500, 100), KDDW.KDDockWidgets.StartHidden);
         }
     }
+
 
     KDDW.LayoutSaver {
         id: layoutSaver

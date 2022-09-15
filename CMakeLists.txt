@@ -21,9 +21,10 @@ set(QT_MIN_VERSION 5.15.2)
 set(ECM_MIN_VERSION 5.83.0)
 set(KF_MIN_VERSION 5.68.0)
 
-project(QPromptStudio
+project(qprompt
+    VERSION ${RELEASE_SERVICE_VERSION}
     DESCRIPTION "Teleprompter software for dedicated teleprompter operators"
-    HOMEPAGE_URL "https://qprompt.app/studio"
+    HOMEPAGE_URL "https://qprompt.app/"
     LANGUAGES CXX
 )
 

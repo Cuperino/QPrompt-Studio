@@ -13,13 +13,14 @@ set(qpromptstudio_HDRS
 
 set(qpromptstudio_ASSETS
     QPrompt/src/assets.qrc
+    QPrompt/src/icons/icons.qrc
 )
 
 #if (Qt5QuickCompiler_FOUND)
     #qtquick_compiler_add_resources(qpromptstudio_SRCS resources.qrc)
 #else ()
     qt5_add_resources(qpromptstudio_SRCS resources.qrc)
-#endif()
+#endif()src/
 
 add_executable(qpromptstudio ${qpromptstudio_SRCS} ${qpromptstudio_HDRS} ${qpromptstudio_ASSETS})
 #add_executable(qpromptstudio main.cpp ${qpromptstudio_SRCS})
