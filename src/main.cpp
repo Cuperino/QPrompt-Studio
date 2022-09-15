@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     // If setQmlEngine isn't found is because KDDockWidgets was compiled without QtQuick support.
     KDDockWidgets::Platform_qtquick::instance()->setQmlEngine(&engine);
-    engine.load((QUrl(QStringLiteral("qrc:/qml/main.qml"))));
+    engine.load((QUrl(QStringLiteral("qrc:///main.qml"))));
 
 //     auto prompterDockWidget = new KDDockWidgets::Views::DockWidget_qtquick("Prompter");
 //     prompterDockWidget->setGuestItem(QStringLiteral("qrc:/PrompterView.qml"));

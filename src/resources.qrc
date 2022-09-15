@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
-  <qresource>
+  <qresource prefix="/">
+    <file alias="main.qml">qml/main.qml</file>
     <!-- Kirigami UI QML -->
 <!--     <file alias="AboutPage.qml">QPrompt/src/kirigami_ui/AboutPage.qml</file> -->
     <file alias="EditorToolbar.qml">QPrompt/src/kirigami_ui/EditorToolbar.qml</file>
@@ -26,6 +27,5 @@
     <!-- Local QML -->
     <file alias="Test.qml">qml/Test.qml</file>
     <file alias="PrompterPage.qml">qml/PrompterPage.qml</file>
-    <file>qml/main.qml</file>
   </qresource>
 </RCC>
