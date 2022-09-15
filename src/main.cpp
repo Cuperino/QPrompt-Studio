@@ -25,9 +25,9 @@
 #endif
 #include <QQmlApplicationEngine>
 
-#include <KLocalizedContext>
-#include <KI18n/KLocalizedString>
-#include <qqmlcontext.h>
+//#include <KLocalizedContext>
+//#include <KI18n/KLocalizedString>
+//#include <qqmlcontext.h>
 
 #include "QPrompt/src/prompter/documenthandler.h"
 
@@ -72,8 +72,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<Marker>();
     // If setQmlEngine isn't found is because KDDockWidgets was compiled without QtQuick support.
     KDDockWidgets::Config::self().setQmlEngine(&engine);
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.load((QUrl(QStringLiteral("qrc:/qml/main.qml"))));
+//    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.load((QUrl(QStringLiteral("qrc:///qml/main.qml"))));
 
 //     auto prompterDockWidget = new KDDockWidgets::DockWidgetQuick("Prompter", KDDockWidgets::DockWidgetBase::Option::Option_NotClosable);
 //     prompterDockWidget->setWidget(QStringLiteral("qrc:/PrompterView.qml"));

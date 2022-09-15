@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
-project(QPromptStudio VERSION ${RELEASE_SERVICE_VERSION})
 
 set(RELEASE_SERVICE_VERSION_MAJOR "0")
 set(RELEASE_SERVICE_VERSION_MINOR "1")
@@ -11,20 +10,20 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to create code from Qt designer ui files
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD 20)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(QT_MIN_VERSION 5.15.2)
+set(QT_MIN_VERSION 6.3.0)
 set(ECM_MIN_VERSION 5.83.0)
 set(KF_MIN_VERSION 5.68.0)
 
 project(qprompt
     VERSION ${RELEASE_SERVICE_VERSION}
-    DESCRIPTION "Teleprompter software for dedicated teleprompter operators"
-    HOMEPAGE_URL "https://qprompt.app/"
+    DESCRIPTION "Teleprompter software for teleprompter operators"
+    HOMEPAGE_URL "https://qprompt.app/studio"
     LANGUAGES CXX
 )
 
@@ -33,7 +32,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core
     Quick
     Gui
@@ -42,13 +41,14 @@ find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED COMPONENTS
     QuickControls2
     Network
     Widgets
-    QuickCompiler
+    #QuickCompiler
 )
-find_package(KDDockWidgets REQUIRED CONFIG)
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
-    Kirigami2
-    I18n  # NO_MODULE
-)
+#find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+#    Kirigami2
+#    I18n  # NO_MODULE
+#)
+find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(KDDockWidgets-qt6 REQUIRED CONFIG)
 
 if (WIN32 OR UNIX) # AND NOT ANDROID
     include(KDEInstallDirs)
@@ -96,6 +96,6 @@ if (WIN32 OR UNIX) # AND NOT ANDROID
     install(FILES ${DOCS} DESTINATION ${DOC_INSTALL_DIR})
 endif()
 
-ki18n_install(po)
+#ki18n_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES) # INCLUDE_QUIET_PACKAGES
