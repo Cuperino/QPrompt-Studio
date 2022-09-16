@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Theme Configuration -->
+        <file>qtquickcontrols2.conf</file>
+        <!-- User Welcome -->
+        <file alias="welcome_cs.html">QPrompt/src/documents/welcome_cs.html</file>
+        <file alias="welcome_de.html">QPrompt/src/documents/welcome_de.html</file>
+        <file alias="welcome_en.html">QPrompt/src/documents/welcome_en.html</file>
+        <file alias="welcome_es.html">QPrompt/src/documents/welcome_es.html</file>
+        <file alias="welcome_fr.html">QPrompt/src/documents/welcome_fr.html</file>
+        <file alias="welcome_it.html">QPrompt/src/documents/welcome_it.html</file>
+        <file alias="welcome_ja.html">QPrompt/src/documents/welcome_ja.html</file>
+        <file alias="welcome_ko.html">QPrompt/src/documents/welcome_ko.html</file>
+        <file alias="welcome_nl.html">QPrompt/src/documents/welcome_nl.html</file>
+        <file alias="welcome_oc.html">QPrompt/src/documents/welcome_oc.html</file>
+        <file alias="welcome_pl.html">QPrompt/src/documents/welcome_pl.html</file>
+        <file alias="welcome_ru.html">QPrompt/src/documents/welcome_ru.html</file>
+        <file alias="welcome_zh_CN.html">QPrompt/src/documents/welcome_zh_CN.html</file>
+        <!-- Empty Untitled Document -->
+        <!-- The same file is referenced twice. This is intentional and related to clearing a file from within a new file. -->
+        <file alias="untitled.html">QPrompt/src/documents/untitled.html</file>
+        <file alias="blank.html">QPrompt/src/documents/untitled.html</file>
+        <!-- Icons -->
+        <file>images/qprompt.png</file>
+        <!-- Fonts -->
+        <!-- Icon Fonts -->
+        <file alias="fonts/fontello.ttf">QPrompt/src/fonts/icons/fontello.ttf</file>
+        <!-- Editor Fonts -->
+        <file alias="fonts/dejavu-sans.otf">QPrompt/src/fonts/editor/dejavu-sans/DejaVuSans.ttf</file>
+        <file alias="fonts/libertinus-sans.otf">QPrompt/src/fonts/editor/Libertinus/static/OTF/LibertinusSans-Regular.otf</file>
+        <file alias="fonts/opendyslexic-bold.otf">QPrompt/src/fonts/editor/OpenDyslexic-Bold.otf</file>
+        <file alias="fonts/sourcehansans.ttc">QPrompt/src/fonts/editor/SourceHanSans/SourceHanSans-Regular.ttc</file>
+        <file alias="fonts/scheherazadenew-regular.ttf">QPrompt/src/fonts/editor/ScheherazadeNew/ScheherazadeNew-Regular.ttf</file>
+        <file alias="fonts/kalpurush.ttf">QPrompt/src/fonts/editor/Kalpurush/Kalpurush.ttf</file>
+        <file alias="fonts/palanquin.ttf">QPrompt/src/fonts/editor/Palanquin-Regular.ttf</file>
+        <!-- <file alias="fonts/libertinus-serif.otf">fonts/editor/Libertinus/static/OTF/LibertinusSerif-Regular.otf</file> -->
+    </qresource>
+</RCC>

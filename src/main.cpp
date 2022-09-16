@@ -67,8 +67,10 @@ int main(int argc, char *argv[])
     //qmlRegisterType<DocumentHandler>(QPROMPT_URI".document", 1, 0, "DocumentHandler");
     //qmlRegisterType<MarkersModel>(QPROMPT_URI".markers", 1, 0, "MarkersModel");
 
-//     auto flags = KDDockWidgets::Config::self().flags();
-//
+    auto &config = KDDockWidgets::Config::self();
+    auto flags = config.flags();
+
+    config.setFlags(flags);
 // #if defined(DOCKS_DEVELOPER_MODE)
 //     auto internalFlags = KDDockWidgets::Config::self().internalFlags();
 //     // These are debug-only/development flags, which you can ignore.

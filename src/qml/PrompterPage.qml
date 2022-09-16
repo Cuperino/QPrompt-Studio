@@ -24,7 +24,6 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
 import Qt.labs.platform 1.1 as Labs
 
 import com.cuperino.qprompt.markers 1.0
@@ -44,11 +43,14 @@ Item {
     property alias openDialog: viewport.openDialog
     property alias prompterBackground: viewport.prompterBackground
     property alias find: viewport.find
-    property alias key_configuration_overlay: key_configuration_overlay
-    property alias displaySettings: displaySettings
-    property alias sideDrawer: sideDrawer
+//    property alias key_configuration_overlay: key_configuration_overlay
+//    property alias displaySettings: displaySettings
+//    property alias sideDrawer: sideDrawer
     property var editorToolbar;
     property int hideDecorations: 1
+
+    anchors.fill: parent
+    clip: true
 
 //     // Editor Toolbar
 //     property var footer: EditorToolbar {
@@ -58,25 +60,16 @@ Item {
     // Unused signal. Leaving for reference.
     //signal test( bool data )
 
-    title: "QPrompt"
-    padding: 0
-
-    onBackRequested: close()
-
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-    Kirigami.Theme.backgroundColor: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0)
-
-    property var main: Item {
-        id: promptingButton
+    Item {
+        id: promptingButton // main
 //         text: i18n("Start prompter")
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
 //         onTriggered: prompter.toggle()
     }
-    property var left: Kirigami.Action {
-        id: decreaseVelocityButton
-        enabled: Kirigami.Settings.isMobile
+    Item {
+        id: decreaseVelocityButton // left
+        enabled: false
 //         text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Decrease velocity") : ""
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-previous-rtl" : "go-previous"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-next.svg" : "icons/go-previous.svg"
@@ -88,9 +81,9 @@ Item {
             //viewport.prompter.focus = true;
         //}
     }
-    property var right: Kirigami.Action {
-        id: increaseVelocityButton
-        enabled: Kirigami.Settings.isMobile
+    Item {
+        id: increaseVelocityButton // right
+        enabled: false
         //text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Increase velocity") : ""
         //iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
         //icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
@@ -105,8 +98,8 @@ Item {
 
     PrompterView {
         id: viewport
-        property alias toolbar: editorToolbar
-        height: (forcedOrientation && forcedOrientation!==3 ? parent.width : (root.theforce && !forcedOrientation ? 3 : 1) * parent.height) + (Kirigami.Settings.isMobile ? 68 : 0)
+        //property alias toolbar: editorToolbar
+        height: (forcedOrientation && forcedOrientation!==3 ? parent.width : (root.theforce && !forcedOrientation ? 3 : 1) * parent.height)
         // anchors.bottomMargin: Kirigami.Settings.isMobile ? -68 : 0
         width: (forcedOrientation && forcedOrientation!==3 ? parent.height : (root.theforce && !forcedOrientation ? 0.3 : 1) * parent.width)
         x: (forcedOrientation===1 || forcedOrientation===3 ? parent.width : (root.theforce && !forcedOrientation ? width*1.165 : 0))
@@ -132,8 +125,6 @@ Item {
                 //}
             //}
         }
-        // Workaround to make regular Page let its contents be covered by action buttons.
-        anchors.bottomMargin: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? -68 : 0
         prompter.performFileOperations: true
         //Behavior on x {
             //enabled: true
@@ -173,8 +164,8 @@ Item {
         anchors.top: prompterCutOffLine.bottom;
         // By extending over the editor we avoid seeing a cutoff in opaque mode and improve contrast
         height: 68 + editor.height
-        color: Kirigami.Theme.alternateBackgroundColor.a===0 ? Qt.rgba(appTheme.__backgroundColor.r*2/3, appTheme.__backgroundColor.g*2/3, appTheme.__backgroundColor.b*2/3, 1)
-                    : Qt.rgba(Kirigami.Theme.alternateBackgroundColor.r*2/3, Kirigami.Theme.alternateBackgroundColor.g*2/3, Kirigami.Theme.alternateBackgroundColor.b*2/3, 1)
+        //color: Kirigami.Theme.alternateBackgroundColor.a===0 ? Qt.rgba(appTheme.__backgroundColor.r*2/3, appTheme.__backgroundColor.g*2/3, appTheme.__backgroundColor.b*2/3, 1)
+        //            : Qt.rgba(Kirigami.Theme.alternateBackgroundColor.r*2/3, Kirigami.Theme.alternateBackgroundColor.g*2/3, Kirigami.Theme.alternateBackgroundColor.b*2/3, 1)
         opacity: root.__opacity * 0.4 + 0.6
         MouseArea {
             anchors.fill: parent
@@ -185,7 +176,7 @@ Item {
     // The cut off line renders as a solid and doesn't cover the other rectangles to improve performance.
     Rectangle {
         id: prompterCutOffLine
-        color: Qt.rgba(Kirigami.Theme.activeBackgroundColor.r/4, Kirigami.Theme.activeBackgroundColor.g/8, Kirigami.Theme.activeBackgroundColor.b/6, 1)
+        //color: Qt.rgba(Kirigami.Theme.activeBackgroundColor.r/4, Kirigami.Theme.activeBackgroundColor.g/8, Kirigami.Theme.activeBackgroundColor.b/6, 1)
         height: 3
         //height: Kirigami.Settings.isMobile ? 3 : 2
         anchors.left: parent.left;
@@ -243,14 +234,12 @@ Item {
         }
     }
 
-    ColorDialog {
+    Labs.ColorDialog {
         id: colorDialog
-        showAlphaChannel: false
     }
 
-    ColorDialog {
+    Labs.ColorDialog {
         id: highlightDialog
-        showAlphaChannel: false
     }
 
     //MarkersDrawer {

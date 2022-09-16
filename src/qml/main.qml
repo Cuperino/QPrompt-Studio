@@ -24,9 +24,54 @@ import com.kdab.dockwidgets 2.0 as KDDW
 
 ApplicationWindow {
     id: root
+
+    property bool __fullScreen: false
+    property bool __autoFullScreen: false
+    property bool fullScreenPlatform: false
+    property bool __translucidBackground: false // !__opacity
+    property bool __scrollAsDial: false
+    property bool __invertArrowKeys: false
+    property bool __invertScrollDirection: false
+    property bool __noScroll: false
+    property bool __telemetry: true
+    property bool forceQtTextRenderer: false
+    property bool passiveNotifications: true
+    property bool __throttleWheel: true
+    property int __wheelThrottleFactor: 8
+    //property int prompterVisibility: Kirigami.ApplicationWindow.Maximized
+    property real __baseSpeed: 3.0
+    property real __curvature: 1.2
+    property double __opacity: 1.0
+    property int __iDefault: 3
+    property int onDiscard: Prompter.CloseActions.Ignore
+    property bool ee: false
+    property bool theforce: false
+    readonly property bool mobileOrSmallScreen: root.width < 1220
+
+    function toggleDockWidget(dw) {
+        if (dw.dockWidget.isOpen()) {
+            dw.dockWidget.close();
+        } else {
+            dw.dockWidget.show();
+        }
+    }
+
     visible: true
     width: 1366
     height: 728
+    title: viewport.document.fileName + (viewport.document.modified?"*":"") + " - " + "QPrompt Studio"
+
+    background: Rectangle {
+        id: appTheme
+        color: __backgroundColor
+        opacity: !root.__translucidBackground
+        property int selection: 2
+        property color __backgroundColor: switch(appTheme.selection) {
+            //case 0: return Qt.rgba(Kirigami.Theme.backgroundColor.r/4, Kirigami.Theme.backgroundColor.g/4, Kirigami.Theme.backgroundColor.b/4, 1);
+            case 1: return "#303030";
+            case 2: return "#FAFAFA";
+        }
+    }
 
     Labs.MenuBar {
         id: nativeMenus
@@ -88,17 +133,9 @@ ApplicationWindow {
         ]
     }
 
-    //Item {
-        //id: root
-    //}
-    property bool __scrollAsDial: false
-    property bool __invertArrowKeys: false
-    property bool __invertScrollDirection: false
-    property bool __noScroll: false
-    property real __baseSpeed: 3.0
-    property real __curvature: 1.2
-    property double __opacity: 1.0
-    property bool __translucidBackground: false // !__opacity
+    Item {
+        id: prompterPage
+    }
 
     //onFrameSwapped: {
         //// Update Projections
@@ -110,14 +147,17 @@ ApplicationWindow {
             ////});
     //}
 
-    //ProjectionsManager {
-        //id: projectionManager
-        //backgroundColor: "#000000"//root.pageStack.currentItem.prompterBackground.color
-        //backgroundOpacity: 1//root.pageStack.currentItem.prompterBackground.opacity
-        ////Forward to prompter and not editor to prevent editing from projection windows
-        ////forwardTo: root.pageStack.currentItem.prompter
-        //forwardTo: prompterPage
-    //}
+    ProjectionsManager {
+        id: projectionManager
+        backgroundColor: "#000000"//root.pageStack.currentItem.prompterBackground.color
+        backgroundOpacity: 1//root.pageStack.currentItem.prompterBackground.opacity
+        //Forward to prompter and not editor to prevent editing from projection windows
+        //forwardTo: root.pageStack.currentItem.prompter
+        forwardTo: prompterPage
+    }
+
+    property alias viewport: prompterPage1.viewport
+    property alias editorToolbar: editorToolbar1
 
     KDDW.DockingArea {
         id: layout
@@ -145,7 +185,20 @@ ApplicationWindow {
         //}
 
         KDDW.DockWidget {
-            id: markers
+            id: prompterDock
+            uniqueName: "Editor"
+            property alias prompterPage: prompterPage1
+            PrompterPage {
+                id: prompterPage1
+                editorToolbar: editorToolbarDock.toolbar
+//                 anchors.fill: parent
+//                 clip: true
+            }
+        }
+
+
+        KDDW.DockWidget {
+            id: markersDock
             uniqueName: "Markers"
             Rectangle {
                 color: "#00FF00"
@@ -153,7 +206,7 @@ ApplicationWindow {
             }
         }
         KDDW.DockWidget {
-            id: projections
+            id: projectionsDock
             uniqueName: "Screens"
             Rectangle {
                 color: "#FF00FF"
@@ -161,16 +214,18 @@ ApplicationWindow {
             }
         }
         KDDW.DockWidget {
-            id: editorToolbar
+            id: editorToolbarDock
+            property alias toolbar: editorToolbar1
             uniqueName: "Toolbar"
             //source: ":/EditorToolbar.qml"
-            //EditorToolbar {
-            //    id: editorToolbar
-            //}
-            Rectangle {
-                color: "#0000FF"
+            EditorToolbar {
+                id: editorToolbar1
                 anchors.fill: parent
             }
+            //Rectangle {
+                //color: "#0000FF"
+                //anchors.fill: parent
+            //}
         }
 /*
         KDDW.DockWidget {
@@ -179,25 +234,13 @@ ApplicationWindow {
             source: ":/Test.qml"
         }*/
 
-        KDDW.DockWidget {
-            id: prompterPage
-            uniqueName: "Editor"
-            Rectangle {
-                color: "#FF0000"
-                anchors.fill: parent
-            }
-            //source: ":/PrompterPage.qml"
-            //property alias editorToolbar: editorToolbar
-        }
-
-
         Component.onCompleted: {
             //projectionManager.putDisplayFlip(Qt.application.screens[0].name, 1/*flipSetting*/)
 
-            addDockWidget(prompterPage, KDDW.KDDockWidgets.Location_OnRight, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
-            addDockWidget(markers, KDDW.KDDockWidgets.Location_OnLeft, prompterPage, Qt.size(320, 100));
-            addDockWidget(editorToolbar, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(1920, 24), KDDW.KDDockWidgets.Option_NotClosable);
-            markers.addDockWidgetAsTab(projections);
+            addDockWidget(prompterDock, KDDW.KDDockWidgets.Location_OnRight, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
+            addDockWidget(markersDock, KDDW.KDDockWidgets.Location_OnLeft, prompterPage, Qt.size(320, 100));
+            addDockWidget(editorToolbarDock, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(1920, 24), KDDW.KDDockWidgets.Option_NotClosable);
+            markersDock.addDockWidgetAsTab(projectionsDock);
             //addDockWidget(test, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
             //addDockWidgetAsTab(test);
             //addDockWidget(prompterPage, KDDW.KDDockWidgets.Location_OnTop, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
@@ -209,7 +252,6 @@ ApplicationWindow {
                                  //Qt.size(500, 100), KDDW.KDDockWidgets.StartHidden);
         }
     }
-
 
     KDDW.LayoutSaver {
         id: layoutSaver
@@ -227,13 +269,5 @@ ApplicationWindow {
     Labs.ColorDialog {
         id: colorDialog
         currentColor: "#FFFFFF" // Kirigami.Theme.textColor
-    }
-
-    function toggleDockWidget(dw) {
-        if (dw.dockWidget.isOpen()) {
-            dw.dockWidget.close();
-        } else {
-            dw.dockWidget.show();
-        }
     }
 }

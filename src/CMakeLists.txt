@@ -12,8 +12,8 @@ set(qpromptstudio_HDRS
 )
 
 set(qpromptstudio_ASSETS
-#    QPrompt/src/assets.qrc
-#    QPrompt/src/icons/icons.qrc
+    assets.qrc
+    QPrompt/src/icons/icons.qrc
 )
 
 #if (Qt6QuickCompiler_FOUND)
