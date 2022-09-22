@@ -14,7 +14,8 @@
 #include <kddockwidgets/Config.h>
 // If DockWidgetQuick isn't found is because KDDockWidgets was compiled without QtQuick support.
 #include <kddockwidgets/private/DockRegistry.h>
-#include <kddockwidgets/ViewFactory.h>
+// #include <kddockwidgets/ViewFactory.h>
+#include <kddockwidgets/ViewFactory_qtquick.h>
 #include <kddockwidgets/Platform_qtquick.h>
 #include <kddockwidgets/views/DockWidget_qtquick.h>
 #include "kddockwidgets/views/MainWindow_qtquick.h"
@@ -31,10 +32,24 @@
 // #include <KI18n/KLocalizedString>
 // #include <qqmlcontext.h>
 
-//#include "QPrompt/src/prompter/documenthandler.h"
+#include "utils/abstractunits.hpp"
+#include "QPrompt/src/prompter/documenthandler.h"
 
 #define QPROMPT_STUDIO_URI "com.cuperino.qpromptstudio"
 #define QPROMPT_URI "com.cuperino.qprompt"
+
+class MaterialViewFactory : public KDDockWidgets::ViewFactory_qtquick
+{
+public:
+    ~MaterialViewFactory() override;
+
+    QUrl titleBarFilename() const override
+    {
+        return QUrl("qrc:///MaterialTitlebar.qml");
+    }
+};
+
+MaterialViewFactory::~MaterialViewFactory() = default;
 
 int main(int argc, char *argv[])
 {
@@ -64,13 +79,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("cuperino.com");
     QCoreApplication::setApplicationName("QPrompt");
 
-    //qmlRegisterType<DocumentHandler>(QPROMPT_URI".document", 1, 0, "DocumentHandler");
-    //qmlRegisterType<MarkersModel>(QPROMPT_URI".markers", 1, 0, "MarkersModel");
+    qmlRegisterType<DocumentHandler>(QPROMPT_URI".document", 1, 0, "DocumentHandler");
+    qmlRegisterType<MarkersModel>(QPROMPT_URI".markers", 1, 0, "MarkersModel");
+    qmlRegisterUncreatableType<AbstractUnits>(QPROMPT_URI".abstractunits", 1, 0, "Units", "Access to Duration enum");
 
     auto &config = KDDockWidgets::Config::self();
     auto flags = config.flags();
 
     config.setFlags(flags);
+    config.setViewFactory(new MaterialViewFactory());
 // #if defined(DOCKS_DEVELOPER_MODE)
 //     auto internalFlags = KDDockWidgets::Config::self().internalFlags();
 //     // These are debug-only/development flags, which you can ignore.

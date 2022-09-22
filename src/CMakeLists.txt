@@ -1,13 +1,14 @@
 set(qpromptstudio_SRCS
     main.cpp
-    #QPrompt/src/prompter/documenthandler.cpp
-    #QPrompt/src/prompter/markersmodel.cpp
+    QPrompt/src/prompter/documenthandler.cpp
+    QPrompt/src/prompter/markersmodel.cpp
     #QPrompt/src/prompter/timer/promptertimer.cpp
 )
 
 set(qpromptstudio_HDRS
-    #QPrompt/src/prompter/documenthandler.h
-    #QPrompt/src/prompter/markersmodel.h
+    utils/abstractunits.hpp
+    QPrompt/src/prompter/documenthandler.h
+    QPrompt/src/prompter/markersmodel.h
     #QPrompt/src/prompter/timer/promptertimer.h
 )
 

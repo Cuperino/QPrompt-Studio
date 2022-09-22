@@ -24,11 +24,11 @@ import com.kdab.dockwidgets 2.0 as KDDW
 
 ApplicationWindow {
     id: root
-
+    readonly property bool __isMobile: false
     property bool __fullScreen: false
     property bool __autoFullScreen: false
     property bool fullScreenPlatform: false
-    property bool __translucidBackground: false // !__opacity
+    property bool __translucidBackground: true // !__opacity
     property bool __scrollAsDial: false
     property bool __invertArrowKeys: false
     property bool __invertScrollDirection: false
@@ -46,7 +46,7 @@ ApplicationWindow {
     property int onDiscard: Prompter.CloseActions.Ignore
     property bool ee: false
     property bool theforce: false
-    readonly property bool mobileOrSmallScreen: root.width < 1220
+    readonly property bool mobileOrSmallScreen: false // root.width < 1220
 
     function toggleDockWidget(dw) {
         if (dw.dockWidget.isOpen()) {
@@ -60,17 +60,21 @@ ApplicationWindow {
     width: 1366
     height: 728
     title: viewport.document.fileName + (viewport.document.modified?"*":"") + " - " + "QPrompt Studio"
+    color: "transparent" // root.__translucidBackground ? "transparent" : "initial"
 
     background: Rectangle {
+        color: appTheme.__backgroundColor
+        opacity: appTheme.opacity
+    }
+    Item {
         id: appTheme
-        color: __backgroundColor
-        opacity: !root.__translucidBackground
         property int selection: 2
-        property color __backgroundColor: switch(appTheme.selection) {
+        property color __backgroundColor: switch(selection) {
             //case 0: return Qt.rgba(Kirigami.Theme.backgroundColor.r/4, Kirigami.Theme.backgroundColor.g/4, Kirigami.Theme.backgroundColor.b/4, 1);
             case 1: return "#303030";
             case 2: return "#FAFAFA";
         }
+        //opacity: (!root.__translucidBackground || viewport.prompterBackground.opacity===1) ? 1.0 : 0.0
     }
 
     Labs.MenuBar {
@@ -137,20 +141,26 @@ ApplicationWindow {
         id: prompterPage
     }
 
-    //onFrameSwapped: {
-        //// Update Projections
-        //const n = 0; //projectionManager.model.count;
-        //if (n>0)
-            ////prompterPage.grabToImage(function(p) {
-                ////for (var i=0; i<n; ++i)
-                    ////projectionManager.model.setProperty(i, "p", String(p.url));
-            ////});
-    //}
+    property int q: 0
+    onFrameSwapped: {
+        // Thus runs from here because there's no event that occurs on each bit of scroll, and this takes much less CPU than a timer, is more precise and scales better.
+        viewport.prompter.markerCompare()
+        // Update Projections
+        if (projectionManager.isEnabled && root.visible/* && projectionManager.model.count*/)
+            // Recount projections on each for loop iteration to prevent value from going stale because a window was closed from a different thread.
+            for (var i=0; i<projectionManager.projections.count; i++) {
+                const w = projectionManager.projections.objectAt(i)
+                if (w/*!==null*/)
+                    w.update();
+                else
+                    break;
+            }
+    }
 
     ProjectionsManager {
         id: projectionManager
         backgroundColor: "#000000"//root.pageStack.currentItem.prompterBackground.color
-        backgroundOpacity: 1//root.pageStack.currentItem.prompterBackground.opacity
+        backgroundOpacity: viewport.prompterBackground.opacity
         //Forward to prompter and not editor to prevent editing from projection windows
         //forwardTo: root.pageStack.currentItem.prompter
         forwardTo: prompterPage
@@ -158,6 +168,7 @@ ApplicationWindow {
 
     property alias viewport: prompterPage1.viewport
     property alias editorToolbar: editorToolbar1
+    property alias sideDrawer: sideDrawer1
 
     KDDW.DockingArea {
         id: layout
@@ -196,11 +207,15 @@ ApplicationWindow {
             }
         }
 
-
         KDDW.DockWidget {
             id: markersDock
             uniqueName: "Markers"
+            property alias sideDrawer: sideDrawer1
+            //MarkersDrawer {
+            //    id: sideDrawer
+            //}
             Rectangle {
+                id: sideDrawer1
                 color: "#00FF00"
                 anchors.fill: parent
             }
@@ -217,14 +232,14 @@ ApplicationWindow {
             id: editorToolbarDock
             property alias toolbar: editorToolbar1
             uniqueName: "Toolbar"
-            //source: ":/EditorToolbar.qml"
             EditorToolbar {
                 id: editorToolbar1
                 anchors.fill: parent
             }
             //Rectangle {
-                //color: "#0000FF"
-                //anchors.fill: parent
+            //    id: editorToolbar1
+            //    color: "#0000FF"
+            //    anchors.fill: parent
             //}
         }
 /*
