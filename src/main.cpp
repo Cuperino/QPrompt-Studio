@@ -1,13 +1,6 @@
-/*
-  This file is part of QPrompt Studio.
-
-  SPDX-FileCopyrightText: 2021 Javier O. Cordero Pérez
-  Author: Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-
-  SPDX-License-Identifier: GPL-3.0-only
-
-  Contact Javier Cordero at <javiercorderoperez@gmail.com> for commercial licensing options.
-*/
+// This file is part of QPrompt Studio.
+// SPDX-FileCopyrightText: 2021-2022 Javier O. Cordero Pérez
+// SPDX-License-Identifier: GPL-3.0-only
 
 
 // #define SDIO = false
@@ -43,9 +36,15 @@ class MaterialViewFactory : public KDDockWidgets::ViewFactory_qtquick
 public:
     ~MaterialViewFactory() override;
 
+    // Title bar
     QUrl titleBarFilename() const override
     {
         return QUrl("qrc:///MaterialTitlebar.qml");
+    }
+    // MainWIndow Background
+    QUrl dockwidgetFilename() const override
+    {
+        return QUrl("qrc:///Blank.qml");
     }
 };
 

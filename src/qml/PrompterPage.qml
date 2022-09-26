@@ -1,11 +1,6 @@
-/*
-  This file is part of QPrompt Studio.
-
-  SPDX-FileCopyrightText: 2022 Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-  Author: Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-
-  SPDX-License-Identifier: GPL-3.0-only
-*/
+// This file is part of QPrompt Studio.
+// SPDX-FileCopyrightText: 2022 Javier O. Cordero Pérez
+// SPDX-License-Identifier: GPL-3.0-only
 
 import QtQuick 2.12
 //import org.kde.kirigami 2.11 as Kirigami
@@ -48,17 +43,17 @@ Item {
     // Unused signal. Leaving for reference.
     //signal test( bool data )
 
-    Item {
+    Text {
         id: promptingButton // main
-//         text: i18n("Start prompter")
+        text: i18n("Start prompter")
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
 //         onTriggered: prompter.toggle()
     }
-    Item {
+    Text {
         id: decreaseVelocityButton // left
         enabled: false
-//         text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Decrease velocity") : ""
+        text:i18n("Decrease velocity")
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-previous-rtl" : "go-previous"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-next.svg" : "icons/go-previous.svg"
         //onTriggered: {
@@ -69,10 +64,10 @@ Item {
             //viewport.prompter.focus = true;
         //}
     }
-    Item {
+    Text {
         id: increaseVelocityButton // right
         enabled: false
-        //text: pageStack.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.None ? i18n("Increase velocity") : ""
+        text: pageStack.i18n("Increase velocity")
         //iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
         //icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
         //onTriggered: {
@@ -143,36 +138,6 @@ Item {
             //}
         //}
     }
-
-    // The following rectangles add a background that is shown behind the mobile action buttons when the user is in desktop mode but the action buttons are showing. These also improve contrast with the editor toolbar when opacity is active.
-    // Action buttons are only supposed to be shown in desktop mode if the user is in fullscreen and not in the prompter's editing state, but there is a bug in Kirigami that causes it to appear under some circumstances or all of the time in desktop operating systems. Behavior varies from system to system.
-    Rectangle {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.top: prompterCutOffLine.bottom;
-        // By extending over the editor we avoid seeing a cutoff in opaque mode and improve contrast
-        height: 68 + editor.height
-        //color: Kirigami.Theme.alternateBackgroundColor.a===0 ? Qt.rgba(appTheme.__backgroundColor.r*2/3, appTheme.__backgroundColor.g*2/3, appTheme.__backgroundColor.b*2/3, 1)
-        //            : Qt.rgba(Kirigami.Theme.alternateBackgroundColor.r*2/3, Kirigami.Theme.alternateBackgroundColor.g*2/3, Kirigami.Theme.alternateBackgroundColor.b*2/3, 1)
-        opacity: root.__opacity * 0.4 + 0.6
-        MouseArea {
-            anchors.fill: parent
-            acceptedButtons: Qt.NoButton
-            onWheel: (wheel)=>viewport.mouse.wheel(wheel)
-        }
-    }
-    // The cut off line renders as a solid and doesn't cover the other rectangles to improve performance.
-    Rectangle {
-        id: prompterCutOffLine
-        //color: Qt.rgba(Kirigami.Theme.activeBackgroundColor.r/4, Kirigami.Theme.activeBackgroundColor.g/8, Kirigami.Theme.activeBackgroundColor.b/6, 1)
-        height: 3
-        //height: Kirigami.Settings.isMobile ? 3 : 2
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        //anchors.top: viewport.bottom;
-        y: parent.height
-    }
-
     // progress: parseInt(viewport.prompter.state)===Prompter.States.Prompting ? viewport.prompter.progress : undefined
 
     Labs.FontDialog {

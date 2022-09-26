@@ -3,7 +3,7 @@
     <file alias="main.qml">qml/main.qml</file>
     <!-- Kirigami UI QML -->
 <!--     <file alias="AboutPage.qml">QPrompt/src/kirigami_ui/AboutPage.qml</file> -->
-    <file alias="EditorToolbar.qml">QPrompt/src/kirigami_ui/EditorToolbar.qml</file>
+<!--     <file alias="EditorToolbar.qml">QPrompt/src/kirigami_ui/EditorToolbar.qml</file> -->
 <!--     <file alias="MarkersDrawer.qml">QPrompt/src/kirigami_ui/MarkersDrawer.qml</file> -->
 <!--     <file alias="InputsOverlay.qml">QPrompt/src/kirigami_ui/InputsOverlay.qml</file> -->
 <!--     <file alias="KeyInputButton.qml">QPrompt/src/kirigami_ui/KeyInputButton.qml</file> -->
@@ -28,5 +28,7 @@
     <file alias="MaterialTitlebar.qml">qml/MaterialTitlebar.qml</file>
     <file alias="Find.qml">qml/Find.qml</file>
     <file alias="PrompterPage.qml">qml/PrompterPage.qml</file>
+    <file alias="EditorToolbar.qml">qml/EditorToolbar.qml</file>
+    <file alias="Blank.qml">qml/Blank.qml</file>
   </qresource>
 </RCC>

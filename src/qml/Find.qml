@@ -1,11 +1,7 @@
-/*
-  This file is part of QPrompt Studio.
+// This file is part of QPrompt Studio.
+// SPDX-FileCopyrightText: 2021-2022 Javier O. Cordero Pérez
+// SPDX-License-Identifier: GPL-3.0-only
 
-  SPDX-FileCopyrightText: 2021-2022 Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-  Author: Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-
-  SPDX-License-Identifier: GPL-3.0-only
-*/
 
 import QtQuick 2.12
 import QtQuick.Controls 2.12

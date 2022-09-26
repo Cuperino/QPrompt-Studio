@@ -1,11 +1,7 @@
-/*
-  This file is part of QPrompt Studio.
+// This file is part of QPrompt Studio.
+// SPDX-FileCopyrightText: 2022 Javier O. Cordero Pérez
+// SPDX-License-Identifier: GPL-3.0-only
 
-  SPDX-FileCopyrightText: 2022 Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-  Author: Javier O. Cordero Pérez <javiercorderoperez@gmail.com>
-
-  SPDX-License-Identifier: GPL-3.0-only
-*/
 
 import QtQuick 2.6
 
@@ -14,22 +10,25 @@ import "qrc:/kddockwidgets/qtquick/views/qml/" as KDDW
 
 KDDW.TitleBarBase {
     id: root
-    color: "black"
-    border.color: "orange"
-    border.width: 2
-    heightWhenVisible: 50
+
+    readonly property int margins: 10
+
+    color: "#303030"
+    //border.color: "white"
+    //border.width: 2
+    //heightWhenVisible: 50
 
     Text {
-        color: "orange"
-        font.bold: true
+        color: "white"
+        //font.bold: true
         text: root.title
         anchors {
             left: parent.left
-            leftMargin: 10
+            leftMargin: root.margins
             verticalCenter: root.verticalCenter
         }
     }
-
+/*
     Rectangle {
         id: closeButton
         enabled: root.closeButtonEnabled
@@ -46,6 +45,26 @@ KDDW.TitleBarBase {
             anchors.fill: parent
             onClicked: {
                 root.closeButtonClicked();
+            }
+        }
+    }
+*/
+    Rectangle {
+        id: floatButton
+        enabled: root.floatButtonVisible
+        radius: 3
+        color: "#56b57e"
+        height: root.height - 20
+        width: height
+        anchors {
+            right: root.right
+            rightMargin: root.margins
+            verticalCenter: root.verticalCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                root.floatButtonClicked();
             }
         }
     }
