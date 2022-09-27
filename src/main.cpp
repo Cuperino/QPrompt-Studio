@@ -26,6 +26,7 @@
 // #include <qqmlcontext.h>
 
 #include "utils/abstractunits.hpp"
+#include "dockwidgets/materialseparator_qtquick.h"
 #include "QPrompt/src/prompter/documenthandler.h"
 
 #define QPROMPT_STUDIO_URI "com.cuperino.qpromptstudio"
@@ -45,6 +46,12 @@ public:
     QUrl dockwidgetFilename() const override
     {
         return QUrl("qrc:///Blank.qml");
+    }
+    KDDockWidgets::View* createSeparator( KDDockWidgets::Controllers::Separator* controller,
+                                          KDDockWidgets::View* parent  ) const override {
+
+        return new MaterialSeparator_qtquick( controller,
+                                        parent ? static_cast<KDDockWidgets::Views::View_qtquick*>( parent ) : nullptr );
     }
 };
 

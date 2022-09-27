@@ -26,6 +26,7 @@
     <file alias="WindowDragger.qml">QPrompt/src/qt/WindowDragger.qml</file>
     <!-- Local QML -->
     <file alias="MaterialTitlebar.qml">qml/MaterialTitlebar.qml</file>
+    <file alias="MaterialSeparator.qml">dockwidgets/MaterialSeparator.qml</file>
     <file alias="Find.qml">qml/Find.qml</file>
     <file alias="PrompterPage.qml">qml/PrompterPage.qml</file>
     <file alias="EditorToolbar.qml">qml/EditorToolbar.qml</file>

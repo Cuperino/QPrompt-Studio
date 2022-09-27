@@ -1,5 +1,6 @@
 set(qpromptstudio_SRCS
     main.cpp
+    dockwidgets/materialseparator_qtquick.cpp
     QPrompt/src/prompter/documenthandler.cpp
     QPrompt/src/prompter/markersmodel.cpp
     #QPrompt/src/prompter/timer/promptertimer.cpp
@@ -7,6 +8,7 @@ set(qpromptstudio_SRCS
 
 set(qpromptstudio_HDRS
     utils/abstractunits.hpp
+    dockwidgets/materialseparator_qtquick.h
     QPrompt/src/prompter/documenthandler.h
     QPrompt/src/prompter/markersmodel.h
     #QPrompt/src/prompter/timer/promptertimer.h
