@@ -53,6 +53,8 @@ ApplicationWindow {
     visible: true
     width: 1366
     height: 728
+    minimumWidth: 2 * 270 + 4
+    minimumHeight: 408
     title: viewport.document.fileName + (viewport.document.modified?"*":"") + " - " + "QPrompt Studio"
     color: root.__translucidBackground ? "transparent" : "initial"
 
@@ -250,7 +252,8 @@ ApplicationWindow {
             uniqueName: "Toolbar"
             EditorToolbar {
                 id: editorToolbar1
-                anchors.fill: parent
+                readonly property var kddockwidgets_min_size: Qt.size(270, implicitHeight - 5)
+                readonly property var kddockwidgets_max_size: kddockwidgets_min_size
             }
             //Rectangle {
             //    id: editorToolbar1
@@ -270,10 +273,12 @@ ApplicationWindow {
             //projectionManager.putDisplayFlip(Qt.application.screens[0].name, 1/*flipSetting*/);
             //viewport.prompter.toggle();
 
+            //setPersistentCentralWidget(editorDock);
             addDockWidget(editorDock, KDDW.KDDockWidgets.Location_OnRight, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
             addDockWidget(markersDock, KDDW.KDDockWidgets.Location_OnLeft, prompterPage, Qt.size(320, 100));
-            addDockWidget(editorToolbarDock, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(1920, 24), KDDW.KDDockWidgets.Option_NotClosable);
+            addDockWidget(editorToolbarDock, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(1920, 190), KDDW.KDDockWidgets.Option_NotClosable);
             markersDock.addDockWidgetAsTab(projectionsDock);
+            markersDock.setAsCurrentTab();
             //addDockWidget(test, KDDW.KDDockWidgets.Location_OnBottom, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
             //addDockWidgetAsTab(test);
             //addDockWidget(prompterPage, KDDW.KDDockWidgets.Location_OnTop, null, Qt.size(800, 600), KDDW.KDDockWidgets.Option_NotClosable);
