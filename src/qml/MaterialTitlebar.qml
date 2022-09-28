@@ -13,7 +13,7 @@ KDDW.TitleBarBase {
 
     readonly property int margins: 10
 
-    color: "#303030"
+    color: "#2D2D2D"
     //border.color: "white"
     //border.width: 2
     //heightWhenVisible: 50
