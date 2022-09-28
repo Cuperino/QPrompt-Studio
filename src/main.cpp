@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
 
     config.setFlags(flags);
     config.setViewFactory(new MaterialViewFactory());
+    config.setSeparatorThickness(4);
 // #if defined(DOCKS_DEVELOPER_MODE)
 //     auto internalFlags = KDDockWidgets::Config::self().internalFlags();
 //     // These are debug-only/development flags, which you can ignore.
