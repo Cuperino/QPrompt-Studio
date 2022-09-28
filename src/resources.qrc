@@ -30,6 +30,7 @@
     <file alias="Find.qml">qml/Find.qml</file>
     <file alias="PrompterPage.qml">qml/PrompterPage.qml</file>
     <file alias="EditorToolbar.qml">qml/EditorToolbar.qml</file>
+    <file alias="MainMenuBar.qml">qml/MainMenuBar.qml</file>
     <file alias="Blank.qml">qml/Blank.qml</file>
   </qresource>
 </RCC>

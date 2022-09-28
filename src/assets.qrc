@@ -22,6 +22,7 @@
         <file alias="blank.html">QPrompt/src/documents/untitled.html</file>
         <!-- Icons -->
         <file>images/qprompt.png</file>
+        <file>images/qprompt-logo-wireframe.png</file>
         <!-- Fonts -->
         <!-- Icon Fonts -->
         <file alias="fonts/fontello.ttf">QPrompt/src/fonts/icons/fontello.ttf</file>

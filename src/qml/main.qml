@@ -18,6 +18,7 @@ import com.kdab.dockwidgets 2.0 as KDDW
 
 ApplicationWindow {
     id: root
+    readonly property string displayName: "QPrompt Studio"
     readonly property bool __isMobile: false
     property bool __fullScreen: false
     property bool __autoFullScreen: false
@@ -97,63 +98,7 @@ ApplicationWindow {
 
     //Material.theme: Material.Dark
 
-    menuBar: MenuBar {
-        Menu {
-
-            title: qsTr("&File")
-
-            Action {
-                text: qsTr("Save layout")
-                onTriggered: {
-                    layoutSaver.saveToFile("mySavedLayout.json");
-                }
-            }
-
-            Action {
-                text: qsTr("Restore layout")
-                onTriggered: {
-                    layoutSaver.restoreFromFile("mySavedLayout.json");
-                }
-            }
-
-            Action {
-                text: qsTr("Toggle widget #4")
-                onTriggered: {
-                    toggleDockWidget(dock4);
-                }
-            }
-
-            Action {
-                text: qsTr("Toggle widget #5")
-                onTriggered: {
-                    toggleDockWidget(dock5);
-                }
-            }
-
-            Action {
-                text: qsTr("Toggle widget #6")
-                onTriggered: {
-                    toggleDockWidget(dock6);
-                }
-            }
-
-            Action {
-                text: qsTr("Close All")
-                onTriggered: {
-                   _kddwDockRegistry.clear();
-                }
-            }
-
-            MenuSeparator { }
-            Action { text: qsTr("&Quit")
-
-                onTriggered: {
-                    Qt.quit();
-                }
-            }
-        }
-
-    }
+    menuBar: MainMenuBar{ }
 
     Item {
         id: prompterPage
