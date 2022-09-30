@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 
-import QtQuick 2.6
+import QtQuick 2.13
 import QtQuick.Controls 2.15
 //import QtQuick.Controls.Material 2.15
 import QtQuick.Layouts 1.15
@@ -130,6 +130,7 @@ ApplicationWindow {
     }
 
     property alias viewport: prompterPage1.viewport
+    property alias editorViewport: editorPage1.viewport
     property alias editorToolbar: editorToolbar1
     property alias sideDrawer: sideDrawer1
 
@@ -161,9 +162,9 @@ ApplicationWindow {
         KDDW.DockWidget {
             id: editorDock
             uniqueName: "Editor"
-            property alias prompterPage: prompterPage1
+            property alias prompterPage: editorPage1
             PrompterPage {
-                id: prompterPage1
+                id: editorPage1
                 editorToolbar: editorToolbarDock.toolbar
 //                 anchors.fill: parent
 //                 clip: true
@@ -198,7 +199,7 @@ ApplicationWindow {
             EditorToolbar {
                 id: editorToolbar1
                 readonly property var kddockwidgets_min_size: Qt.size(270, implicitHeight - 5)
-                readonly property var kddockwidgets_max_size: kddockwidgets_min_size
+                //readonly property var kddockwidgets_max_size: kddockwidgets_min_size
             }
             //Rectangle {
             //    id: editorToolbar1
@@ -239,6 +240,23 @@ ApplicationWindow {
     KDDW.LayoutSaver {
         id: layoutSaver
     }
+
+    Window {
+        id: editorWindow
+        title: "QPrompt Teleprompter"
+        transientParent: root
+        color: "transparent"
+        property alias prompterPage: prompterPage1
+        visible: true
+        PrompterPage {
+            id: prompterPage1
+            editorToolbar: editorToolbarDock.toolbar
+            // anchors.fill: parent
+            // clip: true
+        }
+    }
+
+
 
     Labs.FontDialog {
         id: fontDialog

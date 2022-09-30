@@ -19,7 +19,7 @@ Item {
     property alias highlightDialog: highlightDialog
     property alias viewport: viewport
     property alias prompter: viewport.prompter
-    property alias editor: viewport.editor
+    // property alias editor: viewport.editor
     property alias countdown: viewport.countdown
     property alias overlay: viewport.overlay
     property alias document: viewport.document
@@ -45,15 +45,17 @@ Item {
 
     Text {
         id: promptingButton // main
-        text: i18n("Start prompter")
+        visible: false
+        text: qsTr("Start prompter")
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
 //         onTriggered: prompter.toggle()
     }
     Text {
         id: decreaseVelocityButton // left
+        visible: false
         enabled: false
-        text:i18n("Decrease velocity")
+        text: qsTr("Decrease velocity")
 //         iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-previous-rtl" : "go-previous"
 //         icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-next.svg" : "icons/go-previous.svg"
         //onTriggered: {
@@ -66,8 +68,9 @@ Item {
     }
     Text {
         id: increaseVelocityButton // right
+        visible: false
         enabled: false
-        text: pageStack.i18n("Increase velocity")
+        text: qsTr("Increase velocity")
         //iconName: Qt.application.layoutDirection === Qt.RightToLeft ? "go-next-rtl" : "go-next"
         //icon.source: Qt.application.layoutDirection === Qt.RightToLeft ? "icons/go-previous.svg" : "icons/go-next.svg"
         //onTriggered: {
