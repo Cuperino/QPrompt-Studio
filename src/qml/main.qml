@@ -61,15 +61,15 @@ ApplicationWindow {
 
     background: Rectangle {
         // id: appTheme
-        readonly property int selection: 0
-        readonly property color __backgroundColor: switch(selection) {
-            case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
-            //case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
-            //case 0: return Qt.rgba(0, 0, 0, 1);
-            //case 0: return Material.background;
-            case 1: return "#303030";
-            case 2: return "#FAFAFA";
-        }
+        //readonly property int selection: 0
+        // readonly property color __backgroundColor: switch(selection) {
+        //     case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
+        //     //case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
+        //     //case 0: return Qt.rgba(0, 0, 0, 1);
+        //     //case 0: return Material.background;
+        //     case 1: return "#303030";
+        //     case 2: return "#FAFAFA";
+        // }
         opacity: (!root.__translucidBackground || viewport.prompterBackground.opacity===1) ? 1.0 : 0.0
 
         //color: __backgroundColor
@@ -83,18 +83,18 @@ ApplicationWindow {
         property alias transparency: root.__translucidBackground
     }
 
-    // Item {
-    //     id: appTheme
-    //     property int selection: 0
-    //     property color __backgroundColor: switch(selection) {
-    //         case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
-    //         //case 0: return Qt.rgba(0, 0, 0, 1);
-    //         //case 0: return Material.background;
-    //         case 1: return "#303030FF";
-    //         case 2: return "#FAFAFAFF";
-    //     }
-    //     opacity: (!root.__translucidBackground || viewport.prompterBackground.opacity===1) ? 1.0 : 0.0
-    // }
+    Item {
+        id: appTheme
+        readonly property int selection: 0
+        readonly property color __backgroundColor: switch(selection) {
+            case 0: return Qt.rgba(Material.background.r/4, Material.background.g/4, Material.background.b/4, 1);
+            //case 0: return Qt.rgba(0, 0, 0, 1);
+            //case 0: return Material.background;
+            case 1: return "#303030FF";
+            case 2: return "#FAFAFAFF";
+        }
+        opacity: (!root.__translucidBackground || viewport.prompterBackground.opacity===1) ? 1.0 : 0.0
+    }
 
     //Material.theme: Material.Dark
 
