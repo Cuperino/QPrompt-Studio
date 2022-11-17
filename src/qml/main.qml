@@ -182,6 +182,7 @@ ApplicationWindow {
                 id: sideDrawer1
                 color: "#333333"
                 anchors.fill: parent
+                property bool drawerOpen: false
             }
         }
         KDDW.DockWidget {

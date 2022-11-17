@@ -25,7 +25,7 @@ set(CMAKE_AUTORCC ON)
 
 set(QT_MIN_VERSION 6.3.0)
 set(ECM_MIN_VERSION 5.83.0)
-#set(KF_MIN_VERSION 5.68.0)
+set(KF_MIN_VERSION 5.100.0)
 
 # Send compiled program and library binaries to "build/bin"
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -37,7 +37,7 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core
     Quick
     Gui
-    #Svg
+    Svg
     Qml
     QuickControls2
     #Network
@@ -45,10 +45,10 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     #QuickCompiler
 )
 find_package(KDDockWidgets-qt6 REQUIRED CONFIG)
-#find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
-    #Kirigami2
-    #I18n  # NO_MODULE
-#)
+find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+#    Kirigami2
+    I18n
+)
 
 if (WIN32 OR UNIX) # AND NOT ANDROID
     include(KDEInstallDirs)
@@ -88,6 +88,7 @@ else()
     add_definitions(-DGIT_BRANCH="Stable")
 endif()
 
+ki18n_install(po)
 add_subdirectory(src)
 
 if (WIN32 OR UNIX) # AND NOT ANDROID
@@ -95,7 +96,5 @@ if (WIN32 OR UNIX) # AND NOT ANDROID
     install(PROGRAMS com.cuperino.qpromptstudio.desktop DESTINATION ${KDE_INSTALL_APPDIR})
     install(FILES ${DOCS} DESTINATION ${DOC_INSTALL_DIR})
 endif()
-
-#ki18n_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES) # INCLUDE_QUIET_PACKAGES

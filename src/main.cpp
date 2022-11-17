@@ -22,7 +22,7 @@
 #include <QQmlApplicationEngine>
 
 // #include <KLocalizedContext>
-// #include <KI18n/KLocalizedString>
+#include <KI18n/KLocalizedString>
 // #include <qqmlcontext.h>
 
 #include "utils/abstractunits.hpp"
