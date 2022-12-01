@@ -1,6 +1,4 @@
 # QPrompt Studio
-Teleprompter software for teleprompter operators. Built with productivity, control accuracy, and smooth performance in mind.
-
 Teleprompter software designed for in-studio prompter operators. Built with productivity, ease of use, and smooth performance in mind. QPrompt Studio runs on Windows, macOS, and Linux.
 
 # Copyright
